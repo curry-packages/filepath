@@ -700,11 +700,11 @@ makeRelative root path
 
 -- | Normalise a file
 --
--- * \/\/ outside of the drive can be made blank
+-- * `//` outside of the drive can be removed
+-- * replace `/` by 'pathSeparator'
+-- * remove `./`
 --
--- * \/ -> 'pathSeparator'
---
--- * .\/ -> \"\"
+-- Because of symlinks, `".."` is not removed.
 --
 --     > Posix:   normalise "/file/\\test////" == "/file/\\test/"
 --     > Posix:   normalise "/file/./test" == "/file/test"
