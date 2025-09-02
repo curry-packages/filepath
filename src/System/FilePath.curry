@@ -1,30 +1,36 @@
 ------------------------------------------------------------------------------
---- This library is a direct port of the Haskell library System.FilePath
---- of Neil Mitchell.
----
---- @author Bjoern Peemoeller
---- @version November 2011
-------------------------------------------------------------------------------
-
+-- | This library is a direct port of the Haskell library `System.FilePath`
+--   of Neil Mitchell.
 --
--- Some short examples:
+-- Author : Bjoern Peemoeller
+-- Version: November 2011
+--
+-- Some short examples for using this library:
 --
 -- You are given a C file, you want to figure out the corresponding object (.o) file:
 --
--- @'replaceExtension' file \"o\"@
+-- ```
+-- replaceExtension file "o"
+-- ```
 --
 -- Haskell module Main imports Test, you have the file named main:
 --
--- @['replaceFileName' path_to_main \"Test\" '<.>' ext | ext <- [\"hs\",\"lhs\"] ]@
+-- ```
+-- [replaceFileName path_to_main "Test" <.> ext | ext <- ["hs","lhs"] ]
+-- ```
 --
 -- You want to download a file from the web and save it to disk:
 --
--- @do let file = 'makeValid' url
---    System.IO.createDirectoryIfMissing True ('takeDirectory' file)@
+-- ```
+-- do let file = makeValid url
+--    System.IO.createDirectoryIfMissing True (takeDirectory file)
+-- ```
 --
--- You want to compile a Haskell file, but put the hi file under \"interface\"
+-- You want to compile a Haskell file, but put the hi file under `"interface\"`
 --
--- @'takeDirectory' file '</>' \"interface\" '</>' ('takeFileName' file \`replaceExtension\` \"hi\"@)
+-- ```
+-- takeDirectory file </> "interface" </> (takeFileName file replaceExtension "hi"
+-- ```
 --
 -- The examples in code format descibed by each function are used to generate
 -- tests, and should give clear semantics for the functions.
@@ -101,10 +107,10 @@ pathSeparators :: [Char]
 pathSeparators = if isWindows then "\\/" else "/"
 
 
--- | Rather than using @(== 'pathSeparator')@, use this. Test if something
+-- | Rather than using `(== pathSeparator)`, use this. Test if something
 --   is a path separator.
 --
--- > isPathSeparator a == (a `elem` pathSeparators)
+--     > isPathSeparator a == (a `elem` pathSeparators)
 isPathSeparator :: Char -> Bool
 isPathSeparator = (`elem` pathSeparators)
 
@@ -190,7 +196,8 @@ splitExtension x = case d of
     (c,d) = break isExtSeparator $ reverse b
 
 
--- | Get the extension of a file, returns @\"\"@ for no extension, @.ext@ otherwise.
+-- | Get the extension of a file,
+--   returns `""` for no extension, `.ext` otherwise.
 --
 -- > takeExtension x == snd (splitExtension x)
 -- > Valid x => takeExtension (addExtension x "ext") == ".ext"
@@ -223,7 +230,7 @@ dropExtension = fst . splitExtension
 
 
 -- | Add an extension, even if there is already one there.
---   E.g. @addExtension \"foo.txt\" \"bat\" -> \"foo.txt.bat\"@.
+--   E.g. `addExtension "foo.txt" "bat" -> "foo.txt.bat"`.
 --
 -- > addExtension "file.txt" "bib" == "file.txt.bib"
 -- > addExtension "file." ".bib" == "file..bib"
@@ -637,7 +644,7 @@ joinPath x = foldr combine "" x
 -- File name manipulators
 
 -- | Equality of two 'FilePath's.
---   If you call @System.Directory.canonicalizePath@
+--   If you call `System.Directory.canonicalizePath`
 --   first this has a much better chance of working.
 --   Note that this doesn't follow symlinks or DOSNAM~1s.
 --
@@ -658,8 +665,8 @@ equalFilePath a b = f a == f b
 
 -- | Contract a filename, based on a relative path.
 --
---   There is no corresponding @makeAbsolute@ function, instead use
---   @System.Directory.canonicalizePath@ which has the same effect.
+--   There is no corresponding `makeAbsolute` function, instead use
+--   `System.Directory.canonicalizePath` which has the same effect.
 --
 -- >          Valid y => equalFilePath x y || (isRelative x && makeRelative y x == x) || equalFilePath (y </> makeRelative y x) x
 -- >          makeRelative x x == "."
@@ -843,8 +850,8 @@ isRelativeDrive x = null x ||
     maybe False (not . isPathSeparator . last . fst) (readDriveLetter x)
 
 
--- | @not . 'isRelative'@
+-- | This is equivalent to `not . isRelative`
 --
--- > isAbsolute x == not (isRelative x)
+--     > isAbsolute x == not (isRelative x)
 isAbsolute :: FilePath -> Bool
 isAbsolute = not . isRelative
