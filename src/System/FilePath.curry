@@ -13,25 +13,19 @@
 --
 -- Haskell module Main imports Test, you have the file named main:
 --
--- ```
--- [replaceFileName path_to_main "Test" <.> ext | ext <- ["hs","lhs"] ]
--- ```
+--     [replaceFileName path_to_main "Test" <.> ext | ext <- ["hs","lhs"] ]
 --
 -- You want to download a file from the web and save it to disk:
 --
--- ```
--- do let file = makeValid url
---    System.IO.createDirectoryIfMissing True (takeDirectory file)
--- ```
+--     do let file = makeValid url
+--        System.IO.createDirectoryIfMissing True (takeDirectory file)
 --
 -- You want to compile a Haskell file, but put the hi file under `"interface"`
 --
--- ```
--- takeDirectory file </> "interface" </> (takeFileName file replaceExtension "hi"
--- ```
+--     takeDirectory file </> "interface" </> (takeFileName file `replaceExtension` "hi")
 --
--- The examples in code format descibed by each function are used to generate
--- tests, and should give clear semantics for the functions.
+-- The examples in code format in the comments of operations describe the
+-- semantics of the operations by valid propositions.
 -----------------------------------------------------------------------------
 
 module System.FilePath
