@@ -11,18 +11,20 @@
 --
 --     replaceExtension file "o"
 --
--- Haskell module Main imports Test, you have the file named main:
+-- Your `Main` module imports module `Test` and you want to find the source of
+-- `Test` in the same directory as `Main`:
 --
---     [replaceFileName path_to_main "Test" <.> ext | ext <- ["hs","lhs"] ]
+--     [replaceFileName path_to_main "Test" <.> ext | ext <- ["curry","lcurry"] ]
+--
+-- For a given Curry source file, you want to generate the name of the
+-- corresponding FlatCurry file stored in the subdirectory `.curry`:
+--
+--     takeDirectory file </> ".curry" </> (takeFileName file `replaceExtension` "fcy")
 --
 -- You want to download a file from the web and save it to disk:
 --
 --     do let file = makeValid url
 --        System.IO.createDirectoryIfMissing True (takeDirectory file)
---
--- You want to compile a Haskell file, but put the hi file under `"interface"`
---
---     takeDirectory file </> "interface" </> (takeFileName file `replaceExtension` "hi")
 --
 -- The examples in code format in the comments of operations describe the
 -- semantics of the operations by valid propositions.
