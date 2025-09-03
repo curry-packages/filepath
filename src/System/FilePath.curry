@@ -38,7 +38,7 @@ module System.FilePath
   searchPathSeparator, isSearchPathSeparator,
   extSeparator, isExtSeparator,
 
-  -- * Path methods (environment $PATH)
+  -- * Path methods (environment `$PATH`)
   splitSearchPath, getSearchPath,
 
   -- * Extension methods
@@ -50,7 +50,7 @@ module System.FilePath
   splitDrive, joinDrive,
   takeDrive, hasDrive, dropDrive, isDrive,
 
-  -- * Operations on a FilePath, as a list of directories
+  -- * Operations on a `FilePath`, as a list of directories
   splitFileName,
   takeFileName, replaceFileName, dropFileName,
   takeBaseName, replaceBaseName,
@@ -58,7 +58,7 @@ module System.FilePath
   combine, (</>),
   splitPath, joinPath, splitDirectories,
 
-  -- * Low level FilePath operators
+  -- * Low level `FilePath` operators
   hasTrailingPathSeparator,
   addTrailingPathSeparator,
   dropTrailingPathSeparator,
@@ -637,10 +637,8 @@ joinPath x = foldr combine "" x
 ---------------------------------------------------------------------
 -- File name manipulators
 
--- | Equality of two 'FilePath's.
---   If you call `System.Directory.canonicalizePath`
---   first this has a much better chance of working.
---   Note that this doesn't follow symlinks or DOSNAM~1s.
+-- | Equality of two `FilePath`s.
+--   Note that this does not follow symlinks or DOSNAM~1s.
 --
 --     >          x == y ==> equalFilePath x y
 --     >          normalise x == normalise y ==> equalFilePath x y
@@ -658,9 +656,6 @@ equalFilePath a b = f a == f b
 
 
 -- | Contract a filename, based on a relative path.
---
---   There is no corresponding `makeAbsolute` function, instead use
---   `System.Directory.canonicalizePath` which has the same effect.
 --
 --     >          Valid y => equalFilePath x y || (isRelative x && makeRelative y x == x) || equalFilePath (y </> makeRelative y x) x
 --     >          makeRelative x x == "."
