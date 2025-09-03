@@ -38,7 +38,7 @@ module System.FilePath
   searchPathSeparator, isSearchPathSeparator,
   extSeparator, isExtSeparator,
 
-  -- * Path methods (environment `$PATH`)
+  -- * Path methods (environment $PATH)
   splitSearchPath, getSearchPath,
 
   -- * Extension methods
@@ -50,7 +50,7 @@ module System.FilePath
   splitDrive, joinDrive,
   takeDrive, hasDrive, dropDrive, isDrive,
 
-  -- * Operations on a `FilePath`, as a list of directories
+  -- * Operations on a FilePath, as a list of directories
   splitFileName,
   takeFileName, replaceFileName, dropFileName,
   takeBaseName, replaceBaseName,
@@ -58,7 +58,7 @@ module System.FilePath
   combine, (</>),
   splitPath, joinPath, splitDirectories,
 
-  -- * Low level `FilePath` operators
+  -- * Low level FilePath operators
   hasTrailingPathSeparator,
   addTrailingPathSeparator,
   dropTrailingPathSeparator,
